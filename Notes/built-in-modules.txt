@@ -1,0 +1,119 @@
+Types of Built-in Modules:
+ OS
+ PATH
+FS
+HTTP
+
+There are many more types of built in modules.
+Even the modules listed above have a lo to of
+properties and methods.
+For full list of all the built-in modules and
+their properties and methods, head over to 
+'nodesjs.org'
+look for the 'doc' tab
+and then inside the doc, click on the lte version of
+node.js. Inside there are list of all the built-in modules.
+Click on anyone of them for lists of their properties and 
+methods.
+
+OS
+let os = require('os');
+Notice that when importing built-in modules, we don't have
+to specify any path. We just put name of the module in quotation
+marks and that's it.
+
+Here some of the methods for the os module
+let user = os.userInfo()
+console.log(user)
+
+// to check system uptime (how long the machine hase been working)
+console.log(`the system uptime is ${os.uptime()}`)
+
+let currentOs = {
+    name: os.type(),
+    release: os.release(),
+    totalmemory: os.totalmem(),
+    freemem: os.freemem()
+}
+
+console.log(currentOs)
+
+PATH
+let path = require('path');
+
+let filepath = path.join('/content/', 'subfolder', 'test.txt');
+// console.log(filepath)
+
+let base = path.basename(filepath)
+console.log(base)
+
+let absolute = path.resolve(__dirname, 'content', 'subfoldr', 'test.txt')
+console.log(absolute)
+
+FS
+// we are destructuring the properties right away
+let {readFileSync, writeFileSync} = require('fs')
+
+
+// we are reading the content of these files (first.txt, second.txt)
+let first = readFileSync('./content/first.txt', 'utf-8')
+let second = readFileSync('./content/second.txt', 'utf-8')
+console.log(first, second)
+
+// to write to a file we say:
+writeFileSync('./content/text-sync.txt', `this is the content: ${first} ${second}`)
+// notice that we are simply entering the contents of the first and second
+// files into the text-sync file
+
+//we can avoid overwriting the already existing content of the 'text-sync.txt' file when we wish to add the phrase, 'hello world'.
+writeFileSync('./content/text-sync.txt', `Hello world`, {flag: 'a'})
+
+All of the above are for the FS module were the sync version
+
+now the ASYNC VERSION
+let {readFile, writeFile} = require('fs')
+
+readFile('./content/first.txt', 'utf-8', (err, result)=> {
+    if (err){
+        console.log(err)
+        return
+    }
+    let first = result
+    readFile('./content/second.txt', 'utf-8', (err, result)=> {
+        if(err){
+            return
+        }
+        let second = result
+        writeFile('./content/textAsync.txt', `here are the results: ${first}, ${second}`, (err, result)=> {
+            if (err){
+                return
+            }
+        console.log(result)
+        })
+    })
+})
+
+above is the callback hell version of executing this task
+
+HTTP
+let server = mana.createServer((req, res)=> {
+    //url is a property of the req object
+    if (req.url === '/'){
+        res.end('welcome to the home page')
+    }
+    if (req.url === '/about'){
+        res.end('welcome to about page')
+    } 
+    res.end(`<h1>Oops</h1>
+    <p>can't find the page you are looking for</p>
+    <a href="/">back to home page</a>`
+    )
+})
+
+server.listen(5000)
+
+
+
+
+
+    

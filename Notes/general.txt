@@ -1,0 +1,119 @@
+//GLOBALS - NO WINDOW!!
+
+// __dirname - path to a directory
+// __filename - file name
+// __require - file to use modules (commonJS)
+// module info about current module file
+// process - info about env where the progam is being executed
+
+MODULES IN NODE
+Every file in node.js is a module.
+if you console.log(module) in a file and run
+it on the terminal (node filename.js), you will get 
+an object that has one of its propeties as exports.
+that property is what is used to export data to
+to other files.
+
+eg if we have and an object
+let name = 'john'
+we can export it like so:
+
+module.exports = name
+
+then in the file which we wish to import the data into, we write
+
+let data = require("filename.js")
+
+the argument in the require is the path to the file that
+contains the data.
+
+we can also export more than one data types or just more than
+one data at once
+eg:
+
+let name = 'John'
+
+let sayHi = (person) => {
+    console.log(`say hi to ${person}`)
+}
+ To export them at once we use this code:
+ module.exports = {name, sayHi}
+
+ then in the file we wish to import the data into
+ we write
+ let data = require("./pathToFile")
+ or you can distructure:
+ let {name, sayHi} = require("pathToFile")
+
+ console.log(data.sayHi(name))
+ or the distructured version:
+ console.log(sayHi(name))
+
+ You can invoke a module instantly when you don't 
+ assign the require to a variable as you import
+ the data. see 7-mind-grenade.js
+
+ your can visit npmjs.com for projects on node. 
+
+NPM
+When we instll node, we automatcally install node package manager
+(NPM).
+NPM allows us to do three things:
+1. Reuse our own code in other projects.
+2. Use code written by other developers.
+3. And share our own solutions with other developers as well.
+for more, visit npmjs.com
+
+A typical node project will have more than one npm package intalled as
+dependencies.
+
+the create react app package is hosted on the npm.
+npm calls the reusable code a package.
+a package is folder that contains a javascript code.
+module is a file that can exports code from it
+
+
+this will skip all the long process where it's prompting you
+for some inputs. 
+you can make those inputs by simply going to the package.json
+file.
+
+PACKAGE.JSON
+Package.json is a manifest file that stores important infromation
+about our project.
+
+There are three ways of creating package.json file:
+1. manual approach by creating it in the root directory
+    and then you creae properties.
+2. npm init 
+    (step by step,  press enter to skip)
+
+
+3. npm init - y 
+    (everything default)
+    this will skip all the long process where it's prompting you
+    for some inputs. 
+    you can make those inputs by simply going to the package.json
+    file.
+
+    LODASH 
+    lodash is an npm that can be install and become a 
+    dependency in packag.json.
+
+    let _ = require('lodash')
+
+    const items = [1,[2, [3, [4]]]]
+    let newItems = _.flatMapDeep(items)
+    console.log(newItems)
+
+    the fattenDeep method is used to make the nested array 
+    become one level array
+    [1, 2, 3, 4]
+
+
+
+
+stopped at 2:04, 09/05
+
+ 
+
